@@ -1,0 +1,23 @@
+:root{
+    box-sizing: border-box;
+}
+
+*,
+::before,
+::after{
+    box-sizing: inherit;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 0.5em;
+}
+
+.grid > * {
+    background-color: darkgray;
+    color: white;
+    padding: 7em;
+    border-radius: 0.5em;
+}
