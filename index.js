@@ -1,56 +1,35 @@
-// 'use strict';
+// Declare the chart dimensions and margins.
+const width = 640;
+const height = 400;
+const marginTop = 20;
+const marginRight = 20;
+const marginBottom = 30;
+const marginLeft = 40;
 
-// // const puppeteer = require('puppeteer');
+// Declare the x (horizontal position) scale.
+const x = d3.scaleUtc()
+    .domain([new Date("2023-01-01"), new Date("2024-01-01")])
+    .range([marginLeft, width - marginRight]);
 
-// import puppeteer from 'puppeteer';
+// Declare the y (vertical position) scale.
+const y = d3.scaleLinear()
+    .domain([0, 100])
+    .range([height - marginBottom, marginTop]);
 
-// (async () => {
-//   const browser = await puppeteer.launch({headless: 'new'});
-//   const page = await browser.newPage();
-//   await page.goto('https://finviz.com/news.ashx', {
-//     waitUntil: 'networkidle2',
-//   });
-//   // page.pdf() is currently supported only in headless mode.
-//   // @see https://bugs.chromium.org/p/chromium/issues/detail?id=753118
-//   await page.pdf({
-//     path: 'hn.pdf',
-//     format: 'letter',
-//   });
+// Create the SVG container.
+const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height);
 
-//   await browser.close();
-// })();
+// Add the x-axis.
+svg.append("g")
+    .attr("transform", `translate(0,${height - marginBottom})`)
+    .call(d3.axisBottom(x));
 
+// Add the y-axis.
+svg.append("g")
+    .attr("transform", `translate(${marginLeft},0)`)
+    .call(d3.axisLeft(y));
 
-
-// let name = 'Log';
-
-// console.log('My name is '+ name);
-
-// // window.onload = getlink;
-
-
-//     let links = document.getElementsByTagName("a");
-//     // alert(links[0])
-//      links[1].onclick = showpic();
-    
-
-
-
-
-
-
-
-// function showpic() {
-
-// let placeholder = document.getElementById('placeholder');
-// placeholder.setAttribute('src','2022-10-08_05-41-27_UTC_3.jpg');
-
-
-// }
-
-
-
-const canvas = document.getElementById("my-canvas");
-const ctx = canvas.getContext("2d");
-
-console.log('test');
+// Append the SVG element.
+container.append(svg.node());
